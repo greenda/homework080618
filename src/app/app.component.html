@@ -1,0 +1,9 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<input type="text" id="input" class="queryInput" placeholder="enter search terms...">
+<div class="horizontalLine"></div>
+<div style="margin: 10px" *ngIf="pageList | async as pageList; ">
+    <app-page-card *ngFor="let page of pageList" [page]="page"></app-page-card>
+</div>
+<ng-template #loadGif>
+    ...loading
+</ng-template>

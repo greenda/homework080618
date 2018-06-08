@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    background: #b6d8d8;
+    font-family: Arial;
+}
+
+a {
+    color: #dfc16d;
+    text-decoration: underline;
+}
+
+.queryInput {
+    width: 510px;
+    margin: 14px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.pageTitle {
+    font-weight: bold;
+    margin: 0px;
+}
+
+.pageCardPanel {
+    background: white;
+    margin: 5px;
+    margin-bottom: 15px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    width: 500px;
+}
+
+.horizontalLine {
+    border-bottom: solid 3px #ff3e33;
+    width: 555px;
+}
