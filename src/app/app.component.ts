@@ -27,8 +27,8 @@ export class AppComponent implements OnInit {
     const sequence$ = fromEvent(input, 'input');
     let timer;
 
-    sequence$.subscribe((event: Event) => {
-      const searchTerms = event.target.value;
+    sequence$.subscribe((event: KeyboardEvent) => {
+      const searchTerms = (<HTMLInputElement>event.target).value;
 
       if (timer) {
         clearTimeout(timer);

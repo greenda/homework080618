@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // tslint:disable-next-line:max-line-length
-  pageServiceUrl: 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDnNVy_7K-zneTAqM_oBMmSfxay3qv_4jw&cx=012656169419254088464:yfaussjhw64&q=';
+  pageServiceUrl: 'https://www.googleapis.com/customsearch/v1?key=AIzaSyDnNVy_7K-zneTAqM_oBMmSfxay3qv_4jw&cx=012656169419254088464:yfaussjhw64&q='
 };
 
 /*
