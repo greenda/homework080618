@@ -20,11 +20,10 @@ export interface IPageResponce {
   providedIn: 'root'
 })
 export class PagesService {
-  public constructor(private _http: HttpClient, @Inject('pageServiceUrl') private _pageServiceUrl: {pageServiceUrl: string}) {
+  public constructor(private _http: HttpClient, @Inject('pageServiceUrl') private _pageServiceUrl: string ) {
   }
 
   public getPages(searchTerms: string): Observable<IPageResponce> {
-    const response: Observable<IPageResponce> =
-      this._http.get<IPageResponce>(`${this._pageServiceUrl.pageServiceUrl}${searchTerms}`); return response;
+    return this._http.get<IPageResponce>(`${this._pageServiceUrl}${searchTerms}`);
   }
 }

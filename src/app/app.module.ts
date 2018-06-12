@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
   ],
   providers: [
     PagesService,
-    {provide: 'pageServiceUrl', useValue: environment}
+    {provide: 'pageServiceUrl', useValue: environment.pageServiceUrl}
   ],
   bootstrap: [AppComponent]
 })

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Observer, fromEvent, of } from 'rxjs';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { of } from 'rxjs';
+import { Observable, Observer, BehaviorSubject } from 'rxjs/Rx';
 import { PagesService, IPage, IPageResponce } from './common/services/pages.service';
-
+import { debounceTime } from 'rxjs/operator/debounceTime';
 
 @Component({
   selector: 'app-root',
@@ -9,34 +10,31 @@ import { PagesService, IPage, IPageResponce } from './common/services/pages.serv
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
   public pageList: Observable<IPage[]>;
+  private searchTearmSequence$$: BehaviorSubject<string>;
 
-  public constructor(private _pagesService: PagesService) {
+  public constructor(private _pagesService: PagesService, private _elementRef: ElementRef) {
+  }
+
+  public inputSearchTearmListener(event: KeyboardEvent) {
+    this.searchTearmSequence$$.next((<HTMLInputElement>event.target).value);
   }
 
   public initPageListByTearm(searchTerms: string) {
     const pageSequence$: Observable<IPageResponce> = this._pagesService.getPages(searchTerms);
     pageSequence$.subscribe((responce) => {
-       this.pageList = of (responce.items);
-    } );
+      this.pageList = of(responce.items);
+    });
   }
 
   public ngOnInit(): void {
-    const input = document.querySelector('#input');
-    const sequence$ = fromEvent(input, 'input');
-    let timer;
+    const delayTime = 300;
+    this.searchTearmSequence$$ = new BehaviorSubject('');
+    this.searchTearmSequence$$.debounceTime(delayTime)
+      .subscribe((searchTerms: string) => this.initPageListByTearm(searchTerms));
+  }
 
-    sequence$.subscribe((event: KeyboardEvent) => {
-      const searchTerms = (<HTMLInputElement>event.target).value;
-
-      if (timer) {
-        clearTimeout(timer);
-      }
-      timer = setTimeout(() => {
-        this.initPageListByTearm(searchTerms);
-      }, 500);
-    });
-
+  public OnDestroy(): void {
+    this.searchTearmSequence$$.unsubscribe();
   }
 }
